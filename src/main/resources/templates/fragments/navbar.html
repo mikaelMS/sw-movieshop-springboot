@@ -22,19 +22,19 @@
         </div>
         <ul class="navbar-nav m-auto">
             <li class="nav-item m-auto">
-                <a class="nav-link" href="../index.html">Home</a>
+                <a class="nav-link" th:href="@{/}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="products.html">Products</a>
+                <a class="nav-link" th:href="@{/products}">Produkte</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-success btn-sm ml-3" href="cart.html">
+            <a class="btn btn-success btn-sm ml-3" th:href="@{/account}">
                 <i class="fa fa-user-circle"></i> Mein Konto
             </a>
         </form>
         <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-success btn-sm ml-3" href="cart.html">
+            <a class="btn btn-success btn-sm ml-3" th:href="@{/cart}">
                 <i class="fa fa-shopping-cart"></i> Einkaufswagen
                 <span class="badge badge-light">3</span>
             </a>
