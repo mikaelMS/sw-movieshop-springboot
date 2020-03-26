@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand navbar-dark bg-dark">
+    <div id="logo">
+        <i class="fa fa-film"></i>
+        <a th:href="@{/}" class="navbar-brand">MikesMovieShop</a>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                   placeholder="Suche..">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary btn-number">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <ul class="navbar-nav m-auto">
+            <li class="nav-item m-auto">
+                <a class="nav-link" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="products.html">Products</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                <i class="fa fa-user-circle"></i> Mein Konto
+            </a>
+        </form>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                <i class="fa fa-shopping-cart"></i> Einkaufswagen
+                <span class="badge badge-light">3</span>
+            </a>
+        </form>
+    </div>
+</nav>
+</body>
+</html>
