@@ -1,0 +1,1 @@
+insert into movie (movie_id, name, director, image_path, price, description, media, available_status) values (1, 'James Bond Skyfall', 'David Fincher', '/images/skyfall_cover.jpg', 9.99, 'Spannender Spionfilm', 'BLURAY', true);

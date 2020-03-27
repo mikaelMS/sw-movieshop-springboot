@@ -1,5 +1,7 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -7,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 //    @Autowired
-//    private KundeServiceIF kundeService;
+    private MovieServiceIF movieService;
 
     @RequestMapping("/")
     public String start() {
@@ -22,7 +24,6 @@ public class HomeController {
     @RequestMapping("/cart")
     public String viewCart() {
         return "sites/cart";
-
     }
 
     @RequestMapping("/account/login")
