@@ -14,6 +14,11 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/products")
+    public String viewAllProducts() {
+        return "sites/products";
+    }
+
 //    @RequestMapping("/registrieren")
 //    public String registrieren(
 //            @ModelAttribute("vorname") String vname,

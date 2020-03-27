@@ -1,0 +1,17 @@
+img.card-img-top {
+    width: 150px;
+}
+
+.products-title {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.rating.d-flex.align-items-left {
+    margin: 8px 8px 8px 3px;
+}
+
+i.products-star.fa.fa-star {
+    margin-left: 4px;
+}
