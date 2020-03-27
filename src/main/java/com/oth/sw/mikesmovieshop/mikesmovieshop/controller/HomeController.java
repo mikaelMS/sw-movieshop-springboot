@@ -11,7 +11,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String start() {
-        return "index";
+        return "index.html";
     }
 
     @RequestMapping("/products")
@@ -28,6 +28,11 @@ public class HomeController {
     @RequestMapping("/account/login")
     public String login() {
         return "sites/account/login";
+    }
+
+    @RequestMapping("/account/registration")
+    public String register() {
+        return "sites/account/registration";
     }
 
 //    @RequestMapping("/registrieren")
