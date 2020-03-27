@@ -18,9 +18,16 @@ public class HomeController {
     public String viewAllProducts() {
         return "sites/products";
     }
+
     @RequestMapping("/cart")
     public String viewCart() {
         return "sites/cart";
+
+    }
+
+    @RequestMapping("/account/login")
+    public String login() {
+        return "sites/account/login";
     }
 
 //    @RequestMapping("/registrieren")
