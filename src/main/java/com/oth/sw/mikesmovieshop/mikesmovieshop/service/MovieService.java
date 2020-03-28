@@ -4,6 +4,8 @@ import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,5 +17,10 @@ public class MovieService implements MovieServiceIF {
     @Override
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
+    }
+
+    @Override
+    public Page<Movie> getAllMovies(Pageable pageable) {
+        return movieRepository.findAll(pageable);
     }
 }

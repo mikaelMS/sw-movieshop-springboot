@@ -2,8 +2,6 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 public class Movie {
@@ -15,8 +13,9 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "movie_Id", updatable = false, nullable = false)
-    private long id;
+    private long movieId;
 
+    @Column(nullable = false)
     @Size(max = 50)
     private String name;
 
@@ -28,24 +27,29 @@ public class Movie {
 //    private Date releaseYear;
     @Column(name = "image_path")
     private String coverImagePath;
+
+    @Column(nullable = false)
     private Double price;
+
+    @Column(columnDefinition="LONGTEXT")
     private String description;
 
+    // TODO: can be both -> array
     @Enumerated(EnumType.STRING)
-    @Column(length = 6)
+    @Column(length = 6, nullable = false)
     private Media media;
 
-    @Column(name = "available_status")
+    @Column(name = "available_status", nullable = false)
     private Boolean availableStatus;
 
     //    private ArrayList<Review> reviews;
 
-    public long getId() {
-        return id;
+    public long getMovieId() {
+        return movieId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setMovieId(long movieId) {
+        this.movieId = movieId;
     }
 
     public String getName() {
@@ -102,5 +106,19 @@ public class Movie {
 
     public void setAvailableStatus(Boolean availableStatus) {
         this.availableStatus = availableStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + movieId +
+                ", name='" + name + '\'' +
+                ", director='" + director + '\'' +
+                ", coverImagePath='" + coverImagePath + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", media=" + media +
+                ", availableStatus=" + availableStatus +
+                '}';
     }
 }

@@ -8,18 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-//    @Autowired
-    private MovieServiceIF movieService;
-
     @RequestMapping("/")
     public String start() {
         return "index.html";
     }
 
-    @RequestMapping("/products")
-    public String viewAllProducts() {
-        return "sites/products";
-    }
+//    @RequestMapping("/products")
+//    public String viewAllProducts() {
+//        return "sites/products";
+//    }
 
     @RequestMapping("/cart")
     public String viewCart() {
