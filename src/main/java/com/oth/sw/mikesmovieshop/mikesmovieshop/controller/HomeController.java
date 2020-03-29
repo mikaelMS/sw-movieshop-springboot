@@ -13,24 +13,9 @@ public class HomeController {
         return "index.html";
     }
 
-//    @RequestMapping("/products")
-//    public String viewAllProducts() {
-//        return "sites/products";
-//    }
-
     @RequestMapping("/cart")
     public String viewCart() {
         return "sites/cart";
-    }
-
-    @RequestMapping("/account/login")
-    public String login() {
-        return "sites/account/login";
-    }
-
-    @RequestMapping("/account/registration")
-    public String register() {
-        return "sites/account/registration";
     }
 
 //    @RequestMapping("/registrieren")
