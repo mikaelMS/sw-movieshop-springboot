@@ -57,41 +57,40 @@
 <!-- END PAGININATION-->
 
 <!-- START PRODUCT LISTING -->
-<tr th:each="movie : ${movies}">
-    <td th:text="${movie.movieId}"></td>
-</tr>
-<!--<div class="album py-5 bg-light">-->
-<!--    <div class="container">-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-4">-->
-<!--                <div class="card mb-4 box-shadow">-->
-<!--                    <div class="text-center">-->
-<!--                        <p class="products-title font-weight-bold">Title</p>-->
-<!--                        <img class="card-img-top" src="../images/skyfall_cover.jpg" alt="Card image cap">-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <p class="card-text text-justify">This is a wider card with supporting text below as a natural lead-in to-->
-<!--                            additional-->
-<!--                            content. This content is a little bit longer.</p>-->
-<!--                        <div class="rating d-flex align-items-left">-->
-<!--                            <small class="text-muted">Bewertung: <span class="rating-number">4.5</span></small>-->
-<!--                            <i class="products-star fa fa-star"></i>-->
-<!--                        </div>-->
-<!--                        <div class="d-flex justify-content-between align-items-center">-->
-<!--                            <div class="btn-group">-->
-<!--                                <p>-->
-<!--                                    <a class="btn btn-secondary" href="#" role="button">Details &raquo;</a>-->
-<!--                                    <a class="btn btn-primary" href="#" role="button">In den Einkaufswagen</a>-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<!--<tr th:each="movie : ${movies}">-->
+<!--    <td th:text="${movie.movieId}"></td>-->
+<!--</tr>-->
+<div th:each="movie : ${movies}" class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="text-center">
+                        <p th:text="${movie.name}" class="products-title font-weight-bold"></p>
+                        <img class="card-img-top" th:src="@{'../' + ${movie.coverImagePath}}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <div class="cut-text">
+                            <p th:text="${movie.description}" class="card-text text-justify"></p>
+                        </div>
+                        <div class="rating d-flex align-items-left">
+                            <small class="text-muted">Bewertung: <span class="rating-number">4.5</span></small>
+                            <i class="products-star fa fa-star"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <p>
+                                    <a class="btn btn-secondary" href="#" role="button">Details &raquo;</a>
+                                    <a class="btn btn-primary" href="#" role="button">In den Einkaufswagen</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- END PRODUCT LISTING -->
 
 <!-- START FOOTER -->

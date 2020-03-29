@@ -15,3 +15,25 @@ img.card-img-top {
 i.products-star.fa.fa-star {
     margin-left: 4px;
 }
+
+.cut-text {
+    overflow: hidden;
+    position: relative;
+    max-height: 6em;
+    padding-right: 0.7em;
+}
+.cut-text:before {
+    content: '..';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.cut-text:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+}
