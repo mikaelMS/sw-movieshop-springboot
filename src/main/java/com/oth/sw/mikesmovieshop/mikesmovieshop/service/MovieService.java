@@ -15,8 +15,9 @@ public class MovieService implements MovieServiceIF {
     private MovieRepository movieRepository;
 
     @Override
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public Movie findMovie(Long movieId) {
+        return movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid movieId:" + movieId));
     }
 
     @Override

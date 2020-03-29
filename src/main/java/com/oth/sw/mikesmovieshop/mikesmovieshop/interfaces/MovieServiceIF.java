@@ -5,6 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MovieServiceIF {
-    public Movie addMovie(Movie movie);
+    public Movie findMovie(Long id);
     public Page<Movie> getAllMovies(Pageable pageable);
 }
