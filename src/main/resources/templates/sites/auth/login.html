@@ -18,31 +18,23 @@
 <!-- START NAVBAR -->
 <div th:insert="fragments/navbar :: navbar"></div>
 <!-- END NAVBAR -->
-<!-- START REGISTRATION FORM -->
+<!-- START LOGIN FORM -->
 <div class="justify-content-center align-items-center">
     <div class="text-center">
         <form class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Registrieren</h1>
-            <label for="inputName" class="sr-only">Vorname</label>
-            <input type="text" id="inputName" class="form-control" placeholder="Vorname" required autofocus>
-            <label for="inputSureName" class="sr-only">Nachname</label>
-            <input type="text" id="inputSureName" class="form-control" placeholder="Nachname" required>
+            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
             <label for="inputPassword" class="sr-only">Passwort</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
-            <label for="inputPasswordAgain" class="sr-only">Passwort wiederholen</label>
-            <input type="password" id="inputPasswordAgain" class="form-control" placeholder="Passwort wiederholen" required>
-            <div class="checkbox mb-3">
                 <div class="etc-login-form">
-                    <p>Bereits Kunde? <a th:href="@{/account/login}">Anmelden</a></p>
+                    <p>Neuer Kunde? <a th:href="@{/auth/registration}">Account erstellen</a></p>
                 </div>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
         </form>
     </div>
 </div>
-<!-- END REGISTRATION FORM -->
+<!-- END LOGIN FORM -->
 <!-- START FOOTER -->
 <div th:insert="fragments/footer :: footer"></div>
 <!-- END FOOTER -->
