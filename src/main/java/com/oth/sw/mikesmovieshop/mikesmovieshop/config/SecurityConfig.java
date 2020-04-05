@@ -40,14 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
         http
                 .formLogin()
-                .loginPage("/auth/login").permitAll()
-                .defaultSuccessUrl("/index")
-                .failureUrl("/auth/login?error")
+                    .loginPage("/auth/login").permitAll()
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/auth/login?error")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/?logout")
-                .deleteCookies("remember-me")
-                .permitAll()
+                .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/?logout")
+                    .deleteCookies("remember-me")
+                    .permitAll()
                 .and()
                 .rememberMe();
 

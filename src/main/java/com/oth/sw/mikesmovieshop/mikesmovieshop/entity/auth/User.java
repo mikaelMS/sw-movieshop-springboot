@@ -25,10 +25,13 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public User() {
     }
+
+//    public User(String email, String password) {
+//        this.email = email;
+//        this.password = password;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

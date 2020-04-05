@@ -13,19 +13,45 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/auth/login")
-    public String viewLoginForm() {
-        return "sites/auth/login";
-    }
+//    @RequestMapping("/auth/login")
+//    public String viewLoginForm() {
+//        return "sites/auth/login";
+//    }
 
     @RequestMapping("/auth/registration")
     public String viewRegistrationForm() {
         return "sites/auth/registration";
     }
 
-    // 1. Get email
-    // 2. Check db for that email
-    // 3. Either successfully create customer or show fail message that email is already registered
+//    @RequestMapping("/auth/login")
+//    @ResponseBody
+//    public String errorWhileLoginIn(@RequestParam String error) {
+//        System.out.println("error" + error);
+//        return "error";
+//    }
+
+//    //TODO: login Postmapping!
+//    @PostMapping("/auth/login")
+//    public String login(
+//            @ModelAttribute("email") String email,
+//            @ModelAttribute("password") String password,
+//            Model model
+//    ) {
+//        System.out.println("Email " + email);
+//        User newUser = new User(email, password);
+//        newUser = userService.createCustomer(newUser);
+//
+//        // TODO: clean up
+//        if (!(newUser.isActive())) {
+//            System.out.println("Email already exists");
+//            return "sites/auth/registration";
+//        } else {
+//            System.out.println("Sucessfully created user id: " + newUser.getUserId());
+//            model.addAttribute("user", newUser.getUserId());
+//            return "sites/auth/login";
+//        }
+//    }
+
     @PostMapping("/auth/registration")
     public String register(
             @ModelAttribute("email") String email,
@@ -33,16 +59,19 @@ public class UserController {
             Model model
     ) {
         System.out.println("Email " + email);
-        User newUser = new User(email, password);
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setPassword(password);
         newUser = userService.createCustomer(newUser);
 
+        // TODO: clean up and stop zerreißen der seite bei doppelt email
         if (!(newUser.isActive())) {
             System.out.println("Email already exists");
-            return "index";
+            return "sites/auth/registration";
         } else {
             System.out.println("Sucessfully created user id: " + newUser.getUserId());
             model.addAttribute("user", newUser.getUserId());
-            return "index";
+            return "sites/auth/login";
         }
     }
 }

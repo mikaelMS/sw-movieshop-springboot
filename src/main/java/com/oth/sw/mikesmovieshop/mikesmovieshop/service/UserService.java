@@ -19,13 +19,23 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+//    @Override
+//    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+//        User user = userRepository.findById(Long.parseLong(id))
+//                .orElseThrow(() -> {
+//                            throw new UsernameNotFoundException("User with nr. " + id + " doesn't exist");
+//                        }
+//                );
+//        return user;
+//    }
+
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        User user = userRepository.findById(Long.parseLong(id))
-                .orElseThrow(() -> {
-                            throw new UsernameNotFoundException("User with nr. " + id + " doesn't exist");
-                        }
-                );
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("hier0 " + email);
+        User user = userRepository.findByEmail(email);
+        System.out.println(user.toString());
+
+        //TODO: check null
         return user;
     }
 
