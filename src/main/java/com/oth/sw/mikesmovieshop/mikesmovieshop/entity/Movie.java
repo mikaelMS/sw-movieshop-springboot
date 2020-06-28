@@ -3,6 +3,7 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 public class Movie {
@@ -142,5 +143,28 @@ public class Movie {
                 ", onStock=" + onStock +
                 ", availableStatus=" + availableStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        System.out.println(movie.toString());
+        return getMovieId() == movie.getMovieId() &&
+                getName().equals(movie.getName()) &&
+                getDirector().equals(movie.getDirector()) &&
+                getYear().equals(movie.getYear()) &&
+                getCoverImagePath().equals(movie.getCoverImagePath()) &&
+                getPrice().equals(movie.getPrice()) &&
+                getDescription().equals(movie.getDescription()) &&
+                getMedia() == movie.getMedia() &&
+                getOnStock().equals(movie.getOnStock()) &&
+                getAvailableStatus().equals(movie.getAvailableStatus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMovieId(), getName(), getDirector(), getYear(), getCoverImagePath(), getPrice(), getDescription(), getMedia(), getOnStock(), getAvailableStatus());
     }
 }

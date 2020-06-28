@@ -23,22 +23,29 @@ public class CartController {
 
     @RequestMapping("/cart")
     public String viewCart(Model model) {
-        model.addAttribute("products", cartService.getAllProducts().keySet());
-        System.out.println(cartService.getAllProducts().entrySet());
-        System.out.println(cartService.getAllProducts().keySet());
+        model.addAttribute("products", cartService.getAllProducts());
+        System.out.println("ION: " + cartService.getAllProducts().toString());
         model.addAttribute("total", cartService.getTotal());
-        System.out.println(cartService.getTotal());
 
         return "sites/cart";
     }
 
     @RequestMapping("/cart/add/{id}")
-    public String showProductDetails(@PathVariable("id") long id, Model model) {
+    public String addProductToCart(@PathVariable("id") long id, Model model) {
         Movie movie = movieService.findMovie(id);
-        System.out.println(movie.toString());
         if (movie.getAvailableStatus()) {
             cartService.addProduct(movie);
         }
+
+        return viewCart(model);
+    }
+
+    @RequestMapping("/cart/remove/{id}")
+    public String removeProductFromCart(@PathVariable("id") long id, Model model) {
+        System.out.println("hier");
+        Movie movie = movieService.findMovie(id);
+        System.out.println(movie.toString());
+        cartService.removeProduct(movie);
 
         return viewCart(model);
     }

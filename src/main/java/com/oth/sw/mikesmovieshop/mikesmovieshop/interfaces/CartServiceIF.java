@@ -1,13 +1,16 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.model.CartItem;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 public interface CartServiceIF {
-    public void addProduct(Movie movie);
+    void addProduct(Movie movie);
 
-    public Map<Movie, Integer> getAllProducts();
+    ArrayList<CartItem> getAllProducts();
 
-    public Double getTotal();
+    Double getTotal();
+
+    void removeProduct(Movie movie);
 }

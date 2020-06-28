@@ -34,14 +34,12 @@
 
         <!-- Product Description -->
         <div class="product-description">
-<!--            TODO:-->
-            <span class="product-details-year">Erscheinungsjahr: </span><span>2000</span>
+            <span class="product-details-year">Erscheinungsjahr: </span><span th:text="${movie.year}"></span>
             <h1 th:text="${movie.name}" id="product-details-title"></h1>
             <p th:text="${movie.description}" id="product-details-description"></p>
         </div>
 
         <div class="rating d-flex align-items-left">
-<!--            TODO: -->
             <small class="text-muted">Bewertung: <span class="rating-number">4.5</span></small>
             <i class="products-star fa fa-star"></i>
         </div>
