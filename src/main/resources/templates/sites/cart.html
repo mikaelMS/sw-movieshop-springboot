@@ -51,7 +51,7 @@
                             <td th:text="${product.movie.name}"></td>
                             <td th:text="${product.movie.media}"></td>
                             <td th:text="${product.quantity}" class="text-center"></td>
-                            <td>
+                            <td class="text-right">
                                 <span th:text="${product.movie.price}"></span>
                                 <span>€</span>
                             </td>
@@ -67,8 +67,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>Summe</td>
-                        <td class="text-right"><span></span>
+                        <td class="text-right">Summe</td>
+                        <td class="text-right">
                             <span th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
                             <span>€</span>
                         </td>

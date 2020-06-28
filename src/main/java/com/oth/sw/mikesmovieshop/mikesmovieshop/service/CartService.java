@@ -51,21 +51,16 @@ public class CartService implements CartServiceIF {
 
     @Override
     public void removeProduct(Movie movie) {
-        System.out.println("nio");
-        if (cart.contains(movie)) {
-            System.out.println("hwieor");
-            for (CartItem cartItem : cart) {
-                if (cartItem.getMovie() == movie) {
-                    if (cartItem.getQuantity() > 1) {
-                        System.out.println("lnweil");
-                        cartItem.setQuantity(cartItem.getQuantity() - 1);
-                    } else if (cartItem.getQuantity() == 1) {
-                        System.out.println("hierwe");
-                        cart.remove(movie);
-                    }
+        for (CartItem cartItem : cart) {
+            if (cartItem.getMovie().getMovieId() == movie.getMovieId()) {
+                if (cartItem.getQuantity() > 1) {
+                    cartItem.setQuantity(cartItem.getQuantity() - 1);
+                    return;
+                } else if (cartItem.getQuantity() == 1) {
+                    cart.remove(cartItem);
+                    return;
                 }
             }
         }
-
     }
 }
