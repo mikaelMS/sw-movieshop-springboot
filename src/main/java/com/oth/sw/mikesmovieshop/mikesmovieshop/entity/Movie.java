@@ -1,6 +1,7 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -22,9 +23,9 @@ public class Movie {
     @Size(max = 20)
     private String director;
 
-    // TOOD: date
-//    @Temporal(TemporalType.DATE)
-//    private Date releaseYear;
+    @Size(max = 4)
+    private String year;
+
     @Column(name = "image_path")
     private String coverImagePath;
 
@@ -39,10 +40,13 @@ public class Movie {
     @Column(length = 6, nullable = false)
     private Media media;
 
+    @Column(name = "on_stock", nullable = false)
+    @Min(value = 0, message = "*Number on stock has to be non negative number")
+    private Double onStock;
+
     @Column(name = "available_status", nullable = false)
     private Boolean availableStatus;
 
-    //    private ArrayList<Review> reviews;
 
     public long getMovieId() {
         return movieId;
@@ -77,7 +81,7 @@ public class Movie {
     }
 
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(Double price) {
@@ -104,20 +108,38 @@ public class Movie {
         return availableStatus;
     }
 
-    public void setAvailableStatus(Boolean availableStatus) {
-        this.availableStatus = availableStatus;
+    public void setAvailableStatus() {
+        this.availableStatus = this.onStock > 0;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public Double getOnStock() {
+        return onStock;
+    }
+
+    public void setOnStock(Double onStock) {
+        this.onStock = onStock;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
-                "id=" + movieId +
+                "movieId=" + movieId +
                 ", name='" + name + '\'' +
                 ", director='" + director + '\'' +
+                ", year='" + year + '\'' +
                 ", coverImagePath='" + coverImagePath + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", media=" + media +
+                ", onStock=" + onStock +
                 ", availableStatus=" + availableStatus +
                 '}';
     }

@@ -10,9 +10,4 @@ public class HomeController {
     public String start() {
         return "index";
     }
-
-    @RequestMapping("/cart")
-    public String viewCart() {
-        return "sites/cart";
-    }
 }

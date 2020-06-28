@@ -18,7 +18,6 @@ public class ProductController {
     @Autowired
     private MovieServiceIF movieService;
 
-    // TODO: add proper logging
     @GetMapping("/products")
     public String showAllProducts(HttpServletRequest request, Model model) {
         int page = 0;

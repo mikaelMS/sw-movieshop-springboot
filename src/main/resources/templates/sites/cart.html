@@ -34,25 +34,25 @@
                     <tr>
                         <th scope="col"> </th>
                         <th scope="col">Produkt</th>
-                        <th scope="col">Verfügbar</th>
+                        <th scope="col"></th>
                         <th scope="col" class="text-center">Anzahl</th>
                         <th scope="col" class="text-right">Preis</th>
                         <th> </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                        <td>Product Name Toto</td>
-                        <td>In stock</td>
-                        <td><select class="form-control" id="exampleSelect1">
-                            <option>1</option>
-                        </select>
-                        </td>
-                        <td class="text-right">33,90 €</td>
-                        <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
-                        </button> </td>
-                    </tr>
+                    <tbody th:each="product : ${products}">
+                        <tr>
+    <!--                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>-->
+                            <td th:text="${product.name}"></td>
+    <!--                            <td>In stock</td>-->
+                            <td><select class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                            </select>
+                            </td>
+                            <td th:text="${product.price}" class="text-right"></td>
+                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
+                            </button> </td>
+                        </tr>
                     <tr>
                         <td></td>
                         <td></td>

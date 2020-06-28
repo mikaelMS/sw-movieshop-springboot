@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart", "/products/**", "/", "/auth/registration", "/h2/**"};
+            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart/**", "/products/**", "/", "/auth/registration", "/h2/**"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

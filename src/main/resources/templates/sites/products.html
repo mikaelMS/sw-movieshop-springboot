@@ -79,7 +79,7 @@
                             <div class="btn-group">
                                 <p>
                                     <a class="btn btn-secondary" th:href="@{/products/{id}(id=${movie.movieId})}" role="button">Details &raquo;</a>
-                                    <a class="btn btn-primary" href="#" role="button">In den Einkaufswagen</a>
+                                    <a class="btn btn-primary" th:href="@{/cart/add/{id}(id=${movie.movieId})}" role="button">In den Einkaufswagen</a>
                                 </p>
                             </div>
                         </div>
