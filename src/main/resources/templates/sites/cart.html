@@ -34,22 +34,26 @@
                     <tr>
                         <th scope="col"> </th>
                         <th scope="col">Produkt</th>
-                        <th scope="col"></th>
+                        <th scope="col">Medium</th>
                         <th scope="col" class="text-center">Anzahl</th>
                         <th scope="col" class="text-right">Preis</th>
                         <th> </th>
                     </tr>
                     </thead>
-                    <tbody th:each="product : ${products}">
-                        <tr>
-    <!--                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>-->
+                    <tbody>
+                        <tr th:each="product : ${products}">
+                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                             <td th:text="${product.name}"></td>
+                            <td th:text="${product.media}"></td>
     <!--                            <td>In stock</td>-->
                             <td><select class="form-control" id="exampleSelect1">
                                 <option>1</option>
                             </select>
                             </td>
-                            <td th:text="${product.price}" class="text-right"></td>
+                            <td class="text-right">
+                                <span th:text="${product.price}"></span>
+                                <span>€</span>
+                            </td>
                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
                             </button> </td>
                         </tr>
@@ -59,7 +63,10 @@
                         <td></td>
                         <td></td>
                         <td>Summe</td>
-                        <td class="text-right">255,90 €</td>
+                        <td class="text-right"><span></span>
+                            <span th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+                            <span>€</span>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -75,7 +82,14 @@
                         <td></td>
                         <td></td>
                         <td><strong>Gesamt</strong></td>
-                        <td class="text-right"><strong>346,90 €</strong></td>
+                        <td class="text-right">
+                            <strong>
+                                <div th:with="result=${total + 6.90}">
+                                    <span th:text="${#numbers.formatDecimal(result, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+                                    <span>€</span>
+                                </div>
+                            </strong>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
