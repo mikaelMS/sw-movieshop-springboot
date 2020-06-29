@@ -73,16 +73,16 @@ public class UserService implements UserDetailsService {
                 newCustomer = restServiceClient.build()
                         .postForObject("http://im-codd:8851/customer/registration",
                                 requestBody, Customer.class);
+
+                user.setActive(true);
+                return userRepository.save(user);
             } catch (HttpClientErrorException | NullPointerException e) {
                 System.out.println();
                 System.out.println(e.getMessage());
                 System.out.println();
-            }
-            assert newCustomer != null;
-            System.out.println(newCustomer.toString());
 
-            user.setActive(true);
-            return userRepository.save(user);
+                return user;
+            }
         }
 
 

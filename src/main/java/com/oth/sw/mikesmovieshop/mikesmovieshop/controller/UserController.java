@@ -69,6 +69,7 @@ public class UserController {
         // TODO: clean up and stop zerreißen der seite bei doppelt email
         if (!(newUser.isActive())) {
             System.out.println("Email already exists");
+            model.addAttribute("exists", true);
             return "sites/auth/registration";
         } else {
             System.out.println("Sucessfully created user id: " + newUser.getUserId());
