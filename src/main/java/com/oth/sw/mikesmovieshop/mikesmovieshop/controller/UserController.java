@@ -1,10 +1,8 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
-import com.oth.sw.mikesmovieshop.mikesmovieshop.config.RestTemplateBuilderConfiguration;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.User;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,29 +20,26 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping("/auth/login")
-//    public String viewLoginForm() {
-//        return "sites/auth/login";
-//    }
-    @GetMapping("/auth/login")
-    public String viewLoginForm() {
+    @RequestMapping("/login")
+    public String viewLoginForm(Model model) {
         System.out.println("hier");
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        // check if user is already logged in
-        if(!(principal instanceof UserDetails)) {
-            return "sites/auth/login";
-        } else {
-            return "cart";
-        }
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        // check if user is already logged in
+//        if(!(principal instanceof UserDetails)) {
+//            return "sites/login";
+//        } else {
+//            return "redirect:/cart/checkout";
+//        }
+        return "sites/login";
     }
 
-    @RequestMapping("/auth/registration")
+    @RequestMapping("/registration")
     public String viewRegistrationForm() {
-        return "sites/auth/registration";
+        return "sites/registration";
     }
 
-    @RequestMapping("/auth/login-error")
+    @RequestMapping("/login-error")
     public String loginError(
             HttpServletRequest request,
             Model model
@@ -61,10 +56,11 @@ public class UserController {
         }
         System.out.println("Error" + error);
         model.addAttribute("error" , error);
-        return "redirect:/auth/login";
+
+        return viewLoginForm(model);
     }
 
-    @PostMapping("/auth/registration")
+    @PostMapping("/registration")
     public String register(
             @ModelAttribute("email") String email,
             @ModelAttribute("password") String password,
@@ -77,11 +73,11 @@ public class UserController {
         if (!(newUser.isActive())) {
             System.out.println("Email already exists");
             model.addAttribute("exists", true);
-            return "sites/auth/registration";
+            return "sites/registration";
         } else {
             System.out.println("Sucessfully created user id: " + newUser.getUserId());
             model.addAttribute("user", newUser.getUserId());
-            return "sites/auth/login";
+            return "sites/login";
         }
     }
 }

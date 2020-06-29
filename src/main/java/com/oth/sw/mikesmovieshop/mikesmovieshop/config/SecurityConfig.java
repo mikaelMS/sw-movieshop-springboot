@@ -29,10 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart", "/cart/add/**", "/cart/remove/**", "/products/**", "/", "/auth/login-error", "/auth/registration", "/h2/**"};
+            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart", "/cart/add/**", "/cart/remove/**", "/products/**", "/", "/login-error", "/registration", "/h2/**"};
 
     private static final String[] ALLOW_ACCESS_ONLY_WITH_AUTHENTICATION = {
-            "/auth/logout", "/cart/checkout"
+            "/logout", "/cart/checkout"
     };
 
     @Override
@@ -43,12 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(ALLOW_ACCESS_ONLY_WITH_AUTHENTICATION).hasRole("USER");
         http
                 .formLogin()
-                    .loginPage("/auth/login").permitAll()
+                    .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/cart", true)
-                    .failureUrl("/auth/login-error")
+                    .failureUrl("/login-error")
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/")
                     .deleteCookies("remember-me")
                     .permitAll()
@@ -56,8 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement()
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true);
-//        http
-//                .headers().frameOptions().disable();
 
         // needed for h2 login
         http.csrf().disable();

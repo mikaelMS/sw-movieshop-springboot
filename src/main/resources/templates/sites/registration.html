@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MikesMovieShop</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -20,28 +20,28 @@
 <!-- START NAVBAR -->
 <div th:insert="fragments/navbar :: navbar"></div>
 <!-- END NAVBAR -->
-<!-- START LOGIN FORM -->
+<!-- START REGISTRATION FORM -->
 <div class="justify-content-center align-items-center">
     <div class="text-center">
-        <form th:action="@{/auth/login}" th:method="post" class="form-signin">
-            <div th:if="${error != null}">
-                <div th:class="alert alert-danger">
-                    Email oder Passwort waren falsch!
-                </div>
-            </div>
-            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <form method="post" action="/registration" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Registrieren</h1>
+            <div th:if="${exists}" class="d-flex justify-content-center" >Email ist bereits vergeben!</div>
             <label for="inputEmail" class="sr-only">Email</label>
-            <input name="username" type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required>
             <label for="inputPassword" class="sr-only">Passwort</label>
             <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
+            <label for="inputPasswordAgain" class="sr-only">Passwort wiederholen</label>
+            <input type="password" id="inputPasswordAgain" class="form-control" placeholder="Passwort wiederholen" required>
+            <div class="checkbox mb-3">
                 <div class="etc-login-form">
-                    <p>Neuer Kunde? <a th:href="@{/auth/registration}">Account erstellen</a></p>
+                    <p>Bereits Kunde? <a th:href="@{/login}">Anmelden</a></p>
                 </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
         </form>
     </div>
 </div>
-<!-- END LOGIN FORM -->
+<!-- END REGISTRATION FORM -->
 <!-- START FOOTER -->
 <div th:insert="fragments/footer :: footer"></div>
 <!-- END FOOTER -->

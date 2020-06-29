@@ -31,13 +31,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
-    private String clientId = "CLI_MS20200629123333912";
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private RestTemplateBuilder restServiceClient;
+
+    private String clientId = "CLI_MS20200629123333912";
 
     @Override
     public User loadUserByUsername(String email) throws UsernameNotFoundException {

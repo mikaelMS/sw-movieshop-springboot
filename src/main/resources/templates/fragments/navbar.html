@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:fragment="headerfiles">
     <meta charset="UTF-8" />
 </head>
@@ -24,10 +24,9 @@
                 <i class="fa fa-user-circle"></i> Mein Konto
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" th:href="@{/auth/login}">Anmelden</a>
-                <a class="dropdown-item" th:href="@{/auth/registration}">Registrieren</a>
-                <!--  TODO: ???-->
-                <a class="dropdown-item" th:href="@{/account/logout}">Abmelden</a>
+                <a sec:authorize="!(isAuthenticated())" class="dropdown-item" th:href="@{/login}">Anmelden</a>
+                <a sec:authorize="!(isAuthenticated())" class="dropdown-item" th:href="@{/registration}">Registrieren</a>
+                <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Abmelden</a>
             </div>
         </div>
         <a class="btn btn-primary" th:href="@{/cart}" role="button" id="shoppingCartButton">

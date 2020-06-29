@@ -7,9 +7,13 @@ import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -35,13 +39,13 @@ public class CartController {
     }
 
     @RequestMapping("/cart/add/{id}")
-    public String addProductToCart(@PathVariable("id") long id) {
+    public String addProductToCart(@PathVariable("id") long id, Model model) {
         Movie movie = movieService.findMovie(id);
         if (movie.getAvailableStatus()) {
             cartService.addProduct(movie);
         }
 
-        return "redirect:/cart";
+        return viewCart(model);
     }
 
     @RequestMapping("/cart/remove/{id}")
@@ -50,17 +54,24 @@ public class CartController {
         System.out.println(movie.toString());
         cartService.removeProduct(movie);
 
-        return "redirect:/cart";
+        return viewCart(model);
     }
 
     @RequestMapping("/cart/checkout")
     public String checkOut(Model model) {
-        ArrayList<CartItem> boughtItems = cartService.getAllProducts();
-        Double total = cartService.getTotal();
-        orderService.saveOrder(new Order(boughtItems, total));
-        cartService.clearCart();
-        model.addAttribute("success", true);
+        // check if user is logged in
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return "cart";
+        if(!(principal instanceof UserDetails)) {
+            return "redirect:/login";
+        } else {
+            ArrayList<CartItem> boughtItems = cartService.getAllProducts();
+            Double total = cartService.getTotal();
+            orderService.saveOrder(new Order(boughtItems, total));
+            cartService.clearCart();
+            model.addAttribute("success", true);
+
+            return viewCart(model);
+        }
     }
 }
