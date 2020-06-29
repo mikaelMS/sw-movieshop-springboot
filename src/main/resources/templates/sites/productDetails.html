@@ -53,8 +53,7 @@
                 <span>Medium:</span>
 
                 <div class="cable-choose">
-                    <button>DVD</button>
-                    <button>BluRay</button>
+                    <div th:text="${movie.media}"></div>
                 </div>
             </div>
         </div>
@@ -62,7 +61,7 @@
         <!-- Product Pricing -->
         <div class="product-price">
             <span th:text="${movie.price} + €"></span>
-            <a href="#" class="cart-btn">In Einkaufswagen</a>
+            <a th:href="@{/cart/add/{id}(id=${movie.movieId})}" class="cart-btn">In Einkaufswagen</a>
         </div>
     </div>
 </div>
