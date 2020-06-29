@@ -2,7 +2,7 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.service;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.CartServiceIF;
-import com.oth.sw.mikesmovieshop.mikesmovieshop.model.CartItem;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

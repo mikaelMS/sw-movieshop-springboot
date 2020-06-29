@@ -1,16 +1,18 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Order;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.CartServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 @Controller
 public class CartController {
@@ -20,6 +22,9 @@ public class CartController {
 
     @Autowired
     private CartServiceIF cartService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping("/cart")
     public String viewCart(Model model) {
@@ -50,4 +55,12 @@ public class CartController {
         return viewCart(model);
     }
 
+    @RequestMapping("/cart/checkout")
+    public String checkOut() {
+        ArrayList<CartItem> boughtItems = cartService.getAllProducts();
+        Double total = cartService.getTotal();
+        orderService.saveOrder(new Order(boughtItems, total));
+
+        return "/";
+    }
 }

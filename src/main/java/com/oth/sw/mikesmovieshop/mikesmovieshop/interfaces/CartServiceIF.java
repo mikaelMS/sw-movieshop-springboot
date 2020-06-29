@@ -1,7 +1,7 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
-import com.oth.sw.mikesmovieshop.mikesmovieshop.model.CartItem;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
 
 import java.util.ArrayList;
 
