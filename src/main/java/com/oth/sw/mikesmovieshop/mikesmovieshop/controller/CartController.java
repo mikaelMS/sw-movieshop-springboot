@@ -61,6 +61,6 @@ public class CartController {
         Double total = cartService.getTotal();
         orderService.saveOrder(new Order(boughtItems, total));
 
-        return "/";
+        return "index";
     }
 }

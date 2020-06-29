@@ -12,7 +12,7 @@ public class CartItem {
     @Column(name = "cart_item_id", updatable = false, nullable = false)
     private long cartItemId;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH})
     public Movie movie;
     public int quantity;
 

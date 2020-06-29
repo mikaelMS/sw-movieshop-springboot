@@ -23,7 +23,7 @@ public class Order {
     @Column(updatable = false, nullable = false)
     private Double total;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST})
     private Collection<CartItem> items;
 
     public Order(ArrayList<CartItem> items, Double total) {
@@ -45,5 +45,19 @@ public class Order {
 
     public Double getTotal() {
         return total;
+    }
+
+    public void setItems(Collection<CartItem> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", createdAt=" + createdAt +
+                ", total=" + total +
+                ", items=" + items +
+                '}';
     }
 }
