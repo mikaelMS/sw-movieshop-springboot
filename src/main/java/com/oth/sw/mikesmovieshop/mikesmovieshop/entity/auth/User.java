@@ -17,8 +17,13 @@ public class User implements UserDetails {
     private long userId;
 
     private String email;
+
+    @Transient
     private String password;
+
     private boolean active = false;
+
+    private String identityProviderCusId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
@@ -26,10 +31,9 @@ public class User implements UserDetails {
     public User() {
     }
 
-//    public User(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
+    public User(String email) {
+        this.email = email;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,34 +60,8 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     public void setPassword(String password) {
@@ -102,8 +80,41 @@ public class User implements UserDetails {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(UserRole userRole) {
+        this.userRoles.add(userRole);
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public String getIdentityProviderCusId() {
+        return identityProviderCusId;
+    }
+
+    public void setIdentityProviderCusId(String identityProviderCusId) {
+        this.identityProviderCusId = identityProviderCusId;
     }
 
     @Override

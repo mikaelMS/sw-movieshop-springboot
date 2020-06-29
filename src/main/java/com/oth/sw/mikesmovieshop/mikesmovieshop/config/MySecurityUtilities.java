@@ -8,9 +8,6 @@ import java.security.SecureRandom;
 
 @Configuration
 public class MySecurityUtilities {
-    // TODO: move hash
-    //@Value("#{environment.USER_PASSWORD_SALT}")
-    //@Value("${application-config.user-password-salt}")
     private static String salt = "Super-streng-geh€1m";
 
     @Bean

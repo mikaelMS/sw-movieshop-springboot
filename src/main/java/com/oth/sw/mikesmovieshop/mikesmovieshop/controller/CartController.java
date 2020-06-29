@@ -35,13 +35,13 @@ public class CartController {
     }
 
     @RequestMapping("/cart/add/{id}")
-    public String addProductToCart(@PathVariable("id") long id, Model model) {
+    public String addProductToCart(@PathVariable("id") long id) {
         Movie movie = movieService.findMovie(id);
         if (movie.getAvailableStatus()) {
             cartService.addProduct(movie);
         }
 
-        return viewCart(model);
+        return "redirect:/cart";
     }
 
     @RequestMapping("/cart/remove/{id}")
@@ -50,7 +50,7 @@ public class CartController {
         System.out.println(movie.toString());
         cartService.removeProduct(movie);
 
-        return viewCart(model);
+        return "redirect:/cart";
     }
 
     @RequestMapping("/cart/checkout")
@@ -60,6 +60,7 @@ public class CartController {
         orderService.saveOrder(new Order(boughtItems, total));
         cartService.clearCart();
         model.addAttribute("success", true);
-        return viewCart(model);
+
+        return "cart";
     }
 }

@@ -29,34 +29,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart/**", "/products/**", "/", "/auth/registration", "/h2/**"};
+            "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart", "/cart/add/**", "/cart/remove/**", "/products/**", "/", "/auth/login-error", "/auth/registration", "/h2/**"};
+
+    private static final String[] ALLOW_ACCESS_ONLY_WITH_AUTHENTICATION = {
+            "/auth/logout", "/cart/checkout"
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION)
-                .permitAll().anyRequest().authenticated()
-        ;
+                .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION).permitAll()
+                .antMatchers(ALLOW_ACCESS_ONLY_WITH_AUTHENTICATION).hasRole("USER");
         http
                 .formLogin()
                     .loginPage("/auth/login").permitAll()
-                    .defaultSuccessUrl("/")
-                    .failureUrl("/auth/login?error")
+                    .defaultSuccessUrl("/cart", true)
+                    .failureUrl("/auth/login-error")
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/?logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                    .logoutSuccessUrl("/")
                     .deleteCookies("remember-me")
                     .permitAll()
                 .and()
-                .rememberMe();
+                    .sessionManagement()
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true);
+//        http
+//                .headers().frameOptions().disable();
 
         // needed for h2 login
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
-//    TODO: logout!
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSecurityService)

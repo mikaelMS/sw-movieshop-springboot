@@ -24,9 +24,9 @@
 <div class="justify-content-center align-items-center">
     <div class="text-center">
         <form th:action="@{/auth/login}" th:method="post" class="form-signin">
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    Invalid username or password.
+            <div th:if="${error != null}">
+                <div th:class="alert alert-danger">
+                    Email oder Passwort waren falsch!
                 </div>
             </div>
             <h1 class="h3 mb-3 font-weight-normal">Login</h1>
