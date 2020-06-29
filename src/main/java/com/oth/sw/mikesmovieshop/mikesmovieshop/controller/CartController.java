@@ -29,7 +29,6 @@ public class CartController {
     @RequestMapping("/cart")
     public String viewCart(Model model) {
         model.addAttribute("products", cartService.getAllProducts());
-        System.out.println("ION: " + cartService.getAllProducts().toString());
         model.addAttribute("total", cartService.getTotal());
 
         return "sites/cart";
@@ -47,7 +46,6 @@ public class CartController {
 
     @RequestMapping("/cart/remove/{id}")
     public String removeProductFromCart(@PathVariable("id") long id, Model model) {
-        System.out.println("hier");
         Movie movie = movieService.findMovie(id);
         System.out.println(movie.toString());
         cartService.removeProduct(movie);
@@ -56,11 +54,12 @@ public class CartController {
     }
 
     @RequestMapping("/cart/checkout")
-    public String checkOut() {
+    public String checkOut(Model model) {
         ArrayList<CartItem> boughtItems = cartService.getAllProducts();
         Double total = cartService.getTotal();
         orderService.saveOrder(new Order(boughtItems, total));
-
-        return "index";
+        cartService.clearCart();
+        model.addAttribute("success", true);
+        return viewCart(model);
     }
 }

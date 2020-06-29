@@ -17,7 +17,6 @@ import java.util.HashMap;
 @Transactional
 public class CartService implements CartServiceIF {
 
-    private HashMap<Movie, Integer> products = new HashMap<>();
     ArrayList<CartItem> cart = new ArrayList<>();
 
     @Override
@@ -61,5 +60,10 @@ public class CartService implements CartServiceIF {
                 }
             }
         }
+    }
+
+    @Override
+    public void clearCart() {
+        cart = new ArrayList<>();
     }
 }

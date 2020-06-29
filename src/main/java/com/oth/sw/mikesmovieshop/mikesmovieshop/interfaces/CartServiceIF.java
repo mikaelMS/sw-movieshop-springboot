@@ -13,4 +13,6 @@ public interface CartServiceIF {
     Double getTotal();
 
     void removeProduct(Movie movie);
+
+    void clearCart();
 }

@@ -29,7 +29,7 @@
         <h1 class="jumbotron-heading">Mein Einkaufswagen</h1>
     </div>
 </section>
-
+<div class="d-flex justify-content-center" th:if="${success != null}"><strong>Erfolgreich Bestellung aufgegeben!</strong></div>
 <div th:if="${products != null and !products.isEmpty()}" class="container mb-4">
     <div class="row">
         <div class="col-12">
