@@ -1,8 +1,10 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
+import com.oth.sw.mikesmovieshop.mikesmovieshop.config.RestTemplateBuilderConfiguration;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.User;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping("/auth/login")
-//    public String viewLoginForm() {
-//        return "sites/auth/login";
-//    }
+    @RequestMapping("/auth/login")
+    public String viewLoginForm() {
+        return "sites/auth/login";
+    }
 
     @RequestMapping("/auth/registration")
     public String viewRegistrationForm() {
@@ -62,7 +64,7 @@ public class UserController {
         User newUser = new User();
         newUser.setEmail(email);
         newUser.setPassword(password);
-        newUser = userService.createCustomer(newUser);
+        newUser = userService.registerCustomer(newUser);
 
         // TODO: clean up and stop zerreißen der seite bei doppelt email
         if (!(newUser.isActive())) {

@@ -16,8 +16,6 @@ public class User implements UserDetails {
     @Column(name = "user_id", updatable = false, nullable = false)
     private long userId;
 
-    // TODO: namen, anschrift, etc.
-
     private String email;
     private String password;
     private boolean active = false;
