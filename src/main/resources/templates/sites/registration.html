@@ -24,8 +24,12 @@
 <div class="justify-content-center align-items-center">
     <div class="text-center">
         <form method="post" action="/registration" class="form-signin">
+            <div th:if="${exists}">
+                <div class="alert alert-danger">
+                    Die Email ist bereits vergeben
+                </div>
+            </div>
             <h1 class="h3 mb-3 font-weight-normal">Registrieren</h1>
-            <div th:if="${exists}" class="d-flex justify-content-center" >Email ist bereits vergeben!</div>
             <label for="inputEmail" class="sr-only">Email</label>
             <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required>
             <label for="inputPassword" class="sr-only">Passwort</label>
