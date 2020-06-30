@@ -37,6 +37,10 @@ public class CartController {
 
     @RequestMapping("/cart")
     public String viewCart(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof User)
+            model.addAttribute("loggedIn", true);
+
         model.addAttribute("products", cartService.getAllProducts());
         model.addAttribute("total", cartService.getTotal());
 
@@ -68,8 +72,6 @@ public class CartController {
         if(user == null) {
             return "redirect:/login";
         } else {
-            System.out.println("LNkl" + user.getUsername());
-            System.out.println("hwoe");
             // get all cart items and total
             ArrayList<CartItem> boughtItems = cartService.getAllProducts();
             Double total = cartService.getTotal();
