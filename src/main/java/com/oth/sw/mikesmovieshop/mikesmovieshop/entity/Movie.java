@@ -47,6 +47,8 @@ public class Movie {
     @Column(name = "available_status", nullable = false)
     private Boolean availableStatus;
 
+    private Double rating;
+
     public long getMovieId() {
         return movieId;
     }
@@ -125,6 +127,18 @@ public class Movie {
 
     public void setOnStock(Double onStock) {
         this.onStock = onStock;
+    }
+
+    public void setAvailableStatus(Boolean availableStatus) {
+        this.availableStatus = availableStatus;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     @Override

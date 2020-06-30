@@ -23,7 +23,6 @@ public class CartService implements CartServiceIF {
     public void addProduct(Movie movie) {
         for (CartItem cartItem : cart) {
             if (cartItem.getMovie().getMovieId() == movie.getMovieId()) {
-                System.out.println("lnin");
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 return;
             }

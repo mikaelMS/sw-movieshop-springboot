@@ -21,9 +21,8 @@ public class ProductController {
     @GetMapping("/products")
     public String showAllProducts(HttpServletRequest request, Model model) {
         int page = 0;
-        int size = 1;
+        int size = 3;
 
-        // when accessed by an api call we check for valid request params
         if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
             page = Integer.parseInt(request.getParameter("page")) - 1;
         }

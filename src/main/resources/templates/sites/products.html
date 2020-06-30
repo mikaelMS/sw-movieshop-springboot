@@ -57,10 +57,10 @@
 <!-- END PAGININATION-->
 
 <!-- START PRODUCT LISTING -->
-<div th:each="movie : ${movies}" class="album py-5 bg-light">
+<div  class="album py-5 bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div th:each="movie : ${movies}" class="col-md-4">
                 <div class="card mb-4 box-shadow">
                     <div class="text-center">
                         <p th:text="${movie.name}" class="products-title font-weight-bold"></p>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="rating d-flex align-items-left">
                             <small th:text="${movie.media}"></small>
-                            <small class="text-muted"> - Bewertung: <span class="rating-number">4.5</span></small>
+                            <small class="text-muted"> - Bewertung: <span th:text="${movie.rating}" class="rating-number"></span></small>
                             <i class="products-star fa fa-star"></i>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">

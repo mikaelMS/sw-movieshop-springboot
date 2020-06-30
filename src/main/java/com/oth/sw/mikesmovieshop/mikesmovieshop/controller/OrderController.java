@@ -24,7 +24,6 @@ public class OrderController {
 
     @RequestMapping("/orders")
     public String viewOrders(Model model, @AuthenticationPrincipal UserDetails user) {
-        System.out.println("lnn");
         User currentUser = userService.findUser(user.getUsername());
         Collection<Order> orders = currentUser.getOrders();
         Collection<CartItem> items = null;
