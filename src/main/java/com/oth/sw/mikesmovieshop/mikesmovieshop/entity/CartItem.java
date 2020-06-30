@@ -16,6 +16,10 @@ public class CartItem {
     public Movie movie;
     public int quantity;
 
+    public CartItem() {
+
+    }
+
     public CartItem(Movie movie, int quantity) {
         this.movie = movie;
         this.quantity = quantity;

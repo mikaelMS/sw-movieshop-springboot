@@ -26,7 +26,7 @@
 <!-- START CART -->
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Mein Einkaufswagen</h1>
+        <h1 class="jumbotron-heading">Mein Bestellungen</h1>
     </div>
 </section>
 <div th:if="${orders != null and !orders.isEmpty()}" class="container mb-4">
@@ -36,70 +36,30 @@
                 <table class="table table">
                     <thead>
                     <tr>
-                        <th scope="col"> </th>
-                        <th scope="col">Produkt</th>
-                        <th scope="col">Medium</th>
-                        <th scope="col" class="text-center">Anzahl</th>
-                        <th scope="col" class="text-right">Preis</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Gesamt</th>
+                        <th scope="col">Items</th>
+                        <th scope="col" class="text-center"></th>
+                        <th scope="col" class="text-right"></th>
+                        <th scope="col" class="text-right"></th>
                         <th> </th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="product : ${products}">
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td th:text="${product.movie.name}"></td>
-                            <td th:text="${product.movie.media}"></td>
-                            <td th:text="${product.quantity}" class="text-center"></td>
-                            <td class="text-right">
-                                <span th:text="${product.movie.price}"></span>
-                                <span>€</span>
-                            </td>
-                        </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right">Summe</td>
-                        <td class="text-right">
-                            <span th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
-                            <span>€</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Lieferung</td>
-                        <td class="text-right">6,90 €</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><strong>Gesamt</strong></td>
-                        <td class="text-right">
-                            <strong>
-                                <div th:with="result=${total + 6.90}">
-                                    <span th:text="${#numbers.formatDecimal(result, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
-                                    <span>€</span>
-                                </div>
-                            </strong>
-                        </td>
-                    </tr>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${order.orderId}"></td>
+                            <td th:text="${order.total}"></td>
+                                <tr th:each="item : ${items}">
+                                    <td th:text="${item.movie.name}"></td>
+                                    <td th:text="${item.movie.media}"></td>
+                                    <td th:text="${item.quantity}" class="text-center"></td>
+                                    <td class="text-right">
+                                        <span th:text="${item.movie.price}"></span>
+                                        <span>€</span>
+                                    </td>
+                                </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 text-right ml-auto">
-                    <a th:href="@{/cart/checkout/}">
-                        <button class="btn btn-lg btn-block btn-success text-uppercase">Zum Checkout</button>
-                    </a>
-                </div>
             </div>
         </div>
     </div>

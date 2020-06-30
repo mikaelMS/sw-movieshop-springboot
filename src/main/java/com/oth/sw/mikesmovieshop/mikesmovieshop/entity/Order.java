@@ -25,6 +25,10 @@ public class Order {
     @OneToMany(cascade = {CascadeType.PERSIST})
     private Collection<CartItem> items;
 
+    public Order() {
+
+    }
+
     public Order(ArrayList<CartItem> items, Double total) {
         this.total = total;
         this.items = items;

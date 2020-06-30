@@ -22,15 +22,6 @@ public class UserController {
 
     @RequestMapping("/login")
     public String viewLoginForm(Model model) {
-        System.out.println("hier");
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        // check if user is already logged in
-//        if(!(principal instanceof UserDetails)) {
-//            return "sites/login";
-//        } else {
-//            return "redirect:/cart/checkout";
-//        }
         return "sites/login";
     }
 
@@ -47,14 +38,13 @@ public class UserController {
         HttpSession session = request.getSession(false);
         boolean error = false;
 
+        // get error
         if (session != null) {
             AuthenticationException ex = (AuthenticationException) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
             if (ex != null) {
                 error = true;
-                System.out.println(ex.toString());
             }
         }
-        System.out.println("Error" + error);
         model.addAttribute("error" , error);
 
         return viewLoginForm(model);
