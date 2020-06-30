@@ -1,22 +1,20 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
-import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-// TODO: ?
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProductController {
 
     @Autowired
-    private MovieServiceIF movieService;
+    private ProductService movieService;
 
     @GetMapping("/products")
     public String showAllProducts(HttpServletRequest request, Model model) {

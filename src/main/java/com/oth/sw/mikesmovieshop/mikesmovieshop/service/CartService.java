@@ -3,6 +3,7 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.service;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.CartServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -17,17 +18,23 @@ import java.util.HashMap;
 @Transactional
 public class CartService implements CartServiceIF {
 
+    @Autowired
+    private ProductService movieService;
+
     ArrayList<CartItem> cart = new ArrayList<>();
 
     @Override
-    public void addProduct(Movie movie) {
-        for (CartItem cartItem : cart) {
-            if (cartItem.getMovie().getMovieId() == movie.getMovieId()) {
-                cartItem.setQuantity(cartItem.getQuantity() + 1);
-                return;
+    public void addProduct(Long id) {
+        Movie movie = movieService.findMovie(id);
+        if (movie.getAvailableStatus()) {
+            for (CartItem cartItem : cart) {
+                if (cartItem.getMovie().getMovieId() == movie.getMovieId()) {
+                    cartItem.setQuantity(cartItem.getQuantity() + 1);
+                    return;
+                }
             }
+            cart.add(new CartItem(movie, 1));
         }
-        cart.add(new CartItem(movie, 1));
     }
 
     @Override
@@ -47,7 +54,8 @@ public class CartService implements CartServiceIF {
     }
 
     @Override
-    public void removeProduct(Movie movie) {
+    public void removeProduct(Long id) {
+        Movie movie = movieService.findMovie(id);
         for (CartItem cartItem : cart) {
             if (cartItem.getMovie().getMovieId() == movie.getMovieId()) {
                 if (cartItem.getQuantity() > 1) {

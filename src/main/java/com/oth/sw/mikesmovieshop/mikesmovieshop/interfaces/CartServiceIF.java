@@ -6,13 +6,13 @@ import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
 import java.util.ArrayList;
 
 public interface CartServiceIF {
-    void addProduct(Movie movie);
+    void addProduct(Long id);
 
     ArrayList<CartItem> getAllProducts();
 
     Double getTotal();
 
-    void removeProduct(Movie movie);
+    void removeProduct(Long id);
 
     void clearCart();
 }

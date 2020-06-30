@@ -1,7 +1,7 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.service;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
-import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.ProductServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MovieService implements MovieServiceIF {
+public class ProductService implements ProductServiceIF {
 
     @Autowired
     private MovieRepository movieRepository;
