@@ -23,10 +23,9 @@ public class OrderService implements OrderServiceIF {
 
     @Override
     @Transactional
-    public void saveOrder(Order order) {
+    public Order saveOrder(Order order) {
         Collection<CartItem> cart = (Collection<CartItem>) cartItemRepository.saveAll(order.getItems());
         order.setItems(cart);
-        Order savedOrder = orderRepository.save(order);
-        System.out.println(savedOrder.toString());
+        return orderRepository.save(order);
     }
 }

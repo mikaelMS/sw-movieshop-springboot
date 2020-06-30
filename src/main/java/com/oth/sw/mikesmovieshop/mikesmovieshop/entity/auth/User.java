@@ -1,5 +1,6 @@
 package com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth;
 
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Order;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.model.Authority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
+
+    @OneToMany(cascade = {CascadeType.DETACH})
+    private Collection<Order> orders;
 
     public User() {
     }
@@ -82,6 +86,15 @@ public class User implements UserDetails {
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);
+    }
+
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
+
+    public void setOrders(Order order) {
+        this.orders.add(order);
     }
 
     @Override

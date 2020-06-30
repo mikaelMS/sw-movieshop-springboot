@@ -2,21 +2,23 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.controller;
 
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Movie;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.Order;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.User;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.CartServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.MovieServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.CartItem;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.service.OrderService;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class CartController {
@@ -29,6 +31,9 @@ public class CartController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/cart")
     public String viewCart(Model model) {
@@ -58,19 +63,29 @@ public class CartController {
     }
 
     @RequestMapping("/cart/checkout")
-    public String checkOut(Model model) {
+    public String checkOut(Model model, @AuthenticationPrincipal UserDetails user) {
         // check if user is logged in
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if(!(principal instanceof UserDetails)) {
+        if(user == null) {
             return "redirect:/login";
         } else {
+            System.out.println("LNkl" + user.getUsername());
+            System.out.println("hwoe");
+            // get all cart items and total
             ArrayList<CartItem> boughtItems = cartService.getAllProducts();
             Double total = cartService.getTotal();
-            orderService.saveOrder(new Order(boughtItems, total));
-            cartService.clearCart();
-            model.addAttribute("success", true);
 
+            // create new order
+            Order createdOrder = orderService.saveOrder(new Order(boughtItems, total));
+
+            // find currently logged in user and set his orders
+            User updatedUser = userService.findUser(user.getUsername());
+            updatedUser.setOrders(createdOrder);
+
+            // persist everything
+            userService.saveUser(updatedUser);
+            cartService.clearCart();
+
+            model.addAttribute("success", true);
             return viewCart(model);
         }
     }

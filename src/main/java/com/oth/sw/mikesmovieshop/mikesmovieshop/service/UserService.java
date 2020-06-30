@@ -3,6 +3,7 @@ package com.oth.sw.mikesmovieshop.mikesmovieshop.service;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.Role;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.User;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.entity.auth.UserRole;
+import com.oth.sw.mikesmovieshop.mikesmovieshop.interfaces.UserServiceIF;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.repository.RoleRepository;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.repository.UserRepository;
 import com.oth.sw.mikesmovieshop.mikesmovieshop.repository.UserRoleRepository;
@@ -18,10 +19,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.Optional;
+
 
 @Service
 @Qualifier("labresources")
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService, UserServiceIF {
     @Autowired
     private UserRepository userRepository;
 
@@ -118,6 +121,21 @@ public class UserService implements UserDetailsService {
                 return user;
             }
         }
+    }
+
+    @Override
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findUser(String email) {
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> {
+                    System.out.println("onno");
+                    throw new UsernameNotFoundException("User with email. " + email + " doesn't exist");
+                });
     }
 }
 

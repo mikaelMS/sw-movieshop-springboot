@@ -26,6 +26,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a sec:authorize="!(isAuthenticated())" class="dropdown-item" th:href="@{/login}">Anmelden</a>
                 <a sec:authorize="!(isAuthenticated())" class="dropdown-item" th:href="@{/registration}">Registrieren</a>
+                <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/orders}">Bestellungen</a>
                 <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Abmelden</a>
             </div>
         </div>

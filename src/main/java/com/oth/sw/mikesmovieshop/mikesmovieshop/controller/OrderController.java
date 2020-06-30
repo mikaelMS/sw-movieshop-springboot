@@ -15,6 +15,6 @@ public class OrderController {
     @GetMapping("/orders")
     public String viewOrders(Model model) {
 
-        return "/";
+        return "site/orders";
     }
 }

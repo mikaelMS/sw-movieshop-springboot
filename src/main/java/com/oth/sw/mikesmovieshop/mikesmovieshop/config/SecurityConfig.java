@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/css/**", "/images/**", "/js/**", "/fonts/**", "/cart", "/cart/add/**", "/cart/remove/**", "/products/**", "/", "/login-error", "/registration", "/h2/**"};
 
     private static final String[] ALLOW_ACCESS_ONLY_WITH_AUTHENTICATION = {
-            "/logout", "/cart/checkout"
+            "/logout", "/cart/checkout", "/orders"
     };
 
     @Override
